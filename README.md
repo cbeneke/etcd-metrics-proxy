@@ -12,12 +12,18 @@ Small proxy services that proxies incoming, unauthenticated requests to the etcd
     	path to client ca file
   -certFile string
     	path to client cert file
-  -ip string
-    	IP address to bind and proxy to
+  -proxyIp string
+    	IP address to proxy to
+  -bindIp string
+    	IP address to bind to  
+  -proxyPort string
+    	port to proxy to
+  -bindPort string
+    	port to bind to
+  -proxyPath string
+    	path to proxy to   	  	
   -keyFile string
-    	path to client key file
-  -port string
-    	port to bind to 	
+    	path to client key file	
 ```
 
 ## Releasing a new version
