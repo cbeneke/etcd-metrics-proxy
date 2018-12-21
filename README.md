@@ -1,5 +1,8 @@
 # etcd-metrics-proxy
 
+[![Build Status](https://travis-ci.org/syseleven/etcd-metrics-proxy.svg?branch=master)](https://travis-ci.org/syseleven/etcd-metrics-proxy)
+[![GitHub license](https://img.shields.io/github/license/syseleven/etcd-metrics-proxy.svg)](https://github.com/syseleven/etcd-metrics-proxy/blob/master/LICENSE)
+
 Small proxy services that proxies incoming, unauthenticated requests to the etcd metrics endpoint with correct certificates.
 
 ## Usage
