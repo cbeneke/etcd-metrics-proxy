@@ -11,10 +11,10 @@ import (
 )
 
 type Proxy struct {
+	client    *http.Client
 	proxyIp   string
 	proxyPort string
 	proxyPath string
-	client    *http.Client
 }
 
 func (p *Proxy) ServeHTTP(wr http.ResponseWriter, r *http.Request) {
@@ -85,10 +85,10 @@ func main() {
 	client := &http.Client{Transport: transport}
 
 	proxy := &Proxy{
+		client: client,
 		proxyIp: *proxyIp,
 		proxyPort: *proxyPort,
 		proxyPath: *proxyPath,
-		client: client,
 	}
 
 	err = http.ListenAndServe(*bindIp + ":" + *bindPort, proxy)
