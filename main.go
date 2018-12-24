@@ -85,13 +85,13 @@ func main() {
 	client := &http.Client{Transport: transport}
 
 	proxy := &Proxy{
-		client: client,
-		proxyIp: *proxyIp,
+		client:    client,
+		proxyIp:   *proxyIp,
 		proxyPort: *proxyPort,
 		proxyPath: *proxyPath,
 	}
 
-	err = http.ListenAndServe(*bindIp + ":" + *bindPort, proxy)
+	err = http.ListenAndServe(*bindIp+":"+*bindPort, proxy)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err.Error())
 	}
