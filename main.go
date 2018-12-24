@@ -11,20 +11,17 @@ import (
 )
 
 type Proxy struct {
+	client    *http.Client
 	proxyIp   string
 	proxyPort string
 	proxyPath string
-	tlsConfig *tls.Config
 }
 
 func (p *Proxy) ServeHTTP(wr http.ResponseWriter, r *http.Request) {
 	var resp *http.Response
 	var err error
 
-	transport := &http.Transport{TLSClientConfig: p.tlsConfig}
-	client := &http.Client{Transport: transport}
-
-	resp, err = client.Get("https://" + p.proxyIp + ":" + p.proxyPort + p.proxyPath)
+	resp, err = p.client.Get("https://" + p.proxyIp + ":" + p.proxyPort + p.proxyPath)
 
 	if err != nil {
 		http.Error(wr, err.Error(), http.StatusInternalServerError)
@@ -84,11 +81,14 @@ func main() {
 		return
 	}
 
+	transport := &http.Transport{TLSClientConfig: tlsConfig}
+	client := &http.Client{Transport: transport}
+
 	proxy := &Proxy{
+		client: client,
 		proxyIp: *proxyIp,
 		proxyPort: *proxyPort,
 		proxyPath: *proxyPath,
-		tlsConfig: tlsConfig,
 	}
 
 	err = http.ListenAndServe(*bindIp + ":" + *bindPort, proxy)
